@@ -1,28 +1,26 @@
 import express from 'express';
-import mongoose from 'mongoose';
-import tournamentRouter from './routers/tournaments.js';
-import tgRouter from './routers/tournament_groups.js';
-import fcRouter from './routers/football_clubs.js';
-import teamsRouter from './routers/teams.js';
-import playerRouter from './routers/players.js';
-import matchRouter from './routers/match_fixtures.js';
+import {connectionDB } from './db/db.js';
+import { TournamentRouter } from './routers/tournaments.js';
+import { TgRouter } from './routers/tournament_groups.js';
+import { TeamRouter } from './routers/teams.js';
+import { PlayerRouter } from './routers/players.js';
+import { ftRouter } from './routers/football_clubs.js';
+// import { MatchRouter } from './routers/match_fixtures.js';
 
-mongoose.connect('mongodb://localhost:27017/tournamentDB').then(() => {
-    console.log('Connected to MongoDB');
-}).catch((error) => {
-    console.error('Error connecting to MongoDB:', error);
-});
+
+connectionDB();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use('/t-s', tournamentRouter);
-app.use('/t-g', tgRouter);
-app.use('/f-c', fcRouter);
-app.use('/t-e', teamsRouter);
-app.use('/p-l', playerRouter);
-app.use('/m-f', matchRouter);
+app.use('/t-s', TournamentRouter);
+app.use('/t-g', TgRouter);
+app.use('/t', TeamRouter);
+app.use('/p', PlayerRouter);
+app.use('/f-c', ftRouter);
+// app.use('/m-f', MatchRouter);  ishlamayapdi
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

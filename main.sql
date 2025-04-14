@@ -22,6 +22,8 @@ CREATE TABLE football_clubs (
     founded_year INTEGER
 );
 
+
+
 CREATE TABLE teams (
     team_id SERIAL PRIMARY KEY,
     team_name VARCHAR(100) NOT NULL,
@@ -39,6 +41,8 @@ CREATE TABLE players (
     jersey_number INTEGER
 );
 
+
+
 CREATE TABLE match_fixtures (
     match_id SERIAL PRIMARY KEY,
     match_date TIMESTAMP NOT NULL,
@@ -50,5 +54,7 @@ CREATE TABLE match_fixtures (
     tournament_id INTEGER NOT NULL REFERENCES tournaments(tournament_id) ON DELETE CASCADE,
     match_status VARCHAR(20) NOT NULL
 );
+
+
 
 
